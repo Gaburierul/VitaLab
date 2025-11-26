@@ -1,0 +1,345 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, html { font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
+.container { width: 90%; max-width: 1200px; margin: auto; }
+
+/* HEADER REDUZIDO */
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header {
+    background-color: #2c3e50;
+    padding: 12px 0;
+    color: #ffffff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* Logo menor e proporcional */
+.header-flex .logo {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+    transform-origin: center;
+}
+.menu {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.menu li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e9faff;
+    text-decoration: none;
+    font-size: 0.98rem;
+    font-weight: 500;
+    transition: 0.2s ease;
+    position: relative;
+    padding: 6px 8px;
+    border-radius: 8px;
+}
+
+/* HOVER SUBLINHADO PREMIUM */
+.menu li a::after:not(.btn-menu-login) {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 0;
+    background: white;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.menu li a:hover::after {
+    width: 100%;
+}
+.menu li a:hover:not(.btn-menu-login) i {
+    transform: translateY(-2px);
+}
+.menu li a:active:not(.btn-menu-login) {
+    transform: scale(0.92) translateY(1px);
+    background: rgba(255, 255, 255, 0.17);
+    box-shadow: 0 2px 6px rgba(0, 72, 96, 0.40);
+}
+
+/* EFEITO PULSE PREMIUM AO CLICAR */
+.menu li a:active:not(.btn-menu-login)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: inherit;
+    transform: scale(1.6);
+    opacity: 0;
+    animation: clickPulseMenu 0.35s ease-out;
+}
+
+/* Animação do pulso */
+@keyframes clickPulseMenu {
+    0% {
+        transform: scale(0.7);
+        opacity: 0.55;
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+.menu li a:hover:not(.btn-menu-login) {
+    background: rgba(255, 255, 255, 0.10);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 72, 96, 0.25);
+    color: #ffffff;
+}
+.btn-menu-login {
+    background: #ffffff;
+    padding: 6px 16px;
+    border-radius: 8px;
+    color: #004d66 !important;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(0, 72, 96, 0.18);
+    transition: 0.18s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-menu-login:hover {
+    background: #e6faff;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(0, 72, 96, 0.35);
+}
+.btn-menu-login:active {
+    transform: scale(0.94) translateY(1px);
+    box-shadow: 0 2px 6px rgba(0, 72, 96, 0.45);
+    background: #d9f4ff;
+}
+
+/* EFEITO “PULSE” sutil ao clicar */
+.btn-menu-login:active::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 153, 204, 0.20);
+    border-radius: inherit;
+    transform: scale(1.4);
+    opacity: 0;
+    animation: clickPulse 0.35s ease-out;
+}
+
+@keyframes clickPulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+/* ÍCONES */
+.menu li a i {
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+.menu li a:hover i {
+    transform: translateY(-2px);
+}
+/* quando quiser maior sempre */
+.header-flex .logo.logo-grande {
+    transform: scale(1.3);         /* AUMENTO VISUAL */
+}
+
+.btn-login {
+    padding: 8px 16px;
+    background-color: #ffffff;
+    color: #004d66;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #e0f7ff;
+    color: #003c50;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 72, 96, 0.25);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    header nav ul {
+        gap: 20px;
+    }
+
+    .header .logo {
+        height: 45px;
+    }
+}
+/* Navbar reduzida */
+header nav ul {
+    display: flex;
+    gap: 32px;
+}
+header nav a {
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #e9faff;
+    transition: all 0.3s ease;
+    position: relative;
+}
+.btn-menu-login::after {
+    display: none !important;
+}
+header nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #ffffff;
+    transition: 0.3s ease;
+    border-radius: 2px;
+}
+header nav a:hover::after{
+    width: 100%;
+}
+header nav a:hover {
+    color: #ffffff;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(90deg, #2c3e50, #34495e);
+    padding: 90px 20px;
+    text-align: center;
+    color: #ffffff;
+}
+.hero h1 {
+    font-size: 3em;
+    color: #ffffff;
+    margin-bottom: 18px;
+}
+.hero p {
+    font-size: 1.1em;
+    margin-bottom: 26px;
+    color: rgba(230, 247, 255, 0.9);
+}
+
+/* Login */
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cta-buttons form {
+    display: flex; flex-direction: column;
+    width: 100%; max-width: 360px; gap: 12px;
+}
+.cta-buttons input {
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+.cta-buttons button {
+    padding: 12px;
+    background-color: #004d66;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.18s ease;
+    box-shadow: 0 6px 18px rgba(0,72,96,0.12);
+}
+.cta-buttons button:hover { background-color: #006f8c; transform: translateY(-2px); }
+
+/* Auth (login/register) UI */
+.auth-wrap { width:100%; max-width:460px; background: rgba(255,255,255,0.96); padding:28px; border-radius:12px; box-shadow:0 10px 36px rgba(0,0,0,0.08); border: 1px solid rgba(0,111,140,0.08); }
+.auth-tabs { display:flex; gap:12px; margin-bottom:14px; }
+.auth-tabs .tab{ flex:1; padding:12px 16px; border-radius:10px; background:#f3f6f8; border:1px solid #e6eef3; cursor:pointer; font-weight:700; }
+.auth-tabs .tab.active{ background:#004d66; color:#fff; box-shadow:0 6px 18px rgba(0,72,96,0.12); }
+.auth-tabs .tab{ color: #004d66; }
+.auth-forms form{ display:flex; flex-direction:column; gap:20px; }
+.auth-forms input, .auth-forms select, .auth-forms textarea { width: 100%; box-sizing: border-box; }
+.auth-forms input[type="text"], .auth-forms input[type="password"], .auth-forms input[type="email"] { padding: 12px 14px; border-radius: 6px; }
+.auth-forms button { padding: 12px 14px; border-radius: 6px; }
+.auth-messages{ margin-top:12px; }
+.msg{ padding:8px 10px; border-radius:8px; font-weight:600; }
+.msg.error{ background:#fee2e2; color:#7f1d1d; border:1px solid #fca5a5; }
+.msg.success{ background:#ecfdf5; color:#064e3b; border:1px solid #86efac; }
+
+/* FEATURES */
+.features {
+    background: linear-gradient(180deg, rgba(0,111,140,0.06), rgba(244,251,253,0.9));
+    padding: 60px 20px;
+    text-align: center;
+}
+.features h2 {
+    font-size: 2em;
+    margin-bottom: 40px;
+    color: #004d66;
+}
+.feature-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+.feature {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: .3s;
+}
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.feature h3 { color: #007f99; margin-bottom: 10px; }
+
+/* FOOTER */
+footer {
+    background-color: #2c3e50;
+    color: #e9f7ff;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.9em;
+}
+
+/* Make the login input/button stand out on dark hero */
+.hero .auth-wrap { background: rgba(255,255,255,0.95); }
+.hero .auth-forms .btn-login, .hero .auth-forms button { background: #004d66; color: #fff; border: none; }
+.hero .auth-forms .btn-login:hover, .hero .auth-forms button:hover { background: #006f8c; }
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    nav ul { flex-direction: column; gap: 10px; }
+    header .container { flex-direction: column; gap: 10px; }
+    .hero h1 { font-size: 2em; }
+}

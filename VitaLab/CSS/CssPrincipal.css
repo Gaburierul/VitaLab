@@ -1,0 +1,230 @@
+/* Resetando margens e padding para um layout mais limpo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+:root{
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --accent: #2980b9;
+    --danger: #e74c3c;
+}
+
+/* Common layout helpers (migrated from common.css) */
+body{ background:var(--bg); color:#243240; font-family: Arial, Helvetica, sans-serif; }
+.container{ padding:28px; padding-bottom:96px; }
+.card{ background:var(--card); padding:18px; border-radius:10px; box-shadow:0 6px 20px rgba(16,24,40,0.06); }
+
+/* Buttons */
+.btn{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; background:var(--accent); color:#fff; border:none; cursor:pointer; }
+.btn.secondary{ background:#f3f4f6; color:#243240; border:1px solid #e6e9ee; }
+.btn.save{ background:#16a34a; }
+.btn:disabled{ opacity:0.6; cursor:not-allowed; }
+
+/* Action small buttons */
+.action-btn{ border:0; background:transparent; padding:6px; border-radius:6px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
+.action-btn svg{ width:18px; height:18px; }
+
+/* Popup / modal common rules */
+.popup{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.35); z-index:1200; }
+.popup.hidden{ display:none; }
+.popup-content{ width:100%; max-width:820px; background:var(--card); padding:18px; border-radius:10px; max-height:85vh; overflow:auto; }
+.popup-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:12px; }
+.modal-open{ overflow:hidden; }
+
+/* Small helpers */
+.search{ padding:8px 10px; border-radius:8px; border:1px solid #e6e9ee; width:320px; }
+ 
+header {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    background-color: #34495e;
+    padding: 15px;
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+.oi p{
+    outline: none;
+    color: aqua;
+    text-decoration: none;
+    text-align: right;
+    
+}
+
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+    
+    font-size: 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    padding: 30px;
+}
+
+.section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section h2 {
+    margin-top: 0;
+}
+.container a{
+
+
+    text-decoration: none;
+
+}
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.botao{
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+.botao:hover {
+        background-color: #45a049;
+    }
+
+        .section {
+            transition: transform .3s ease, box-shadow .3s ease;
+            border-radius: 12px;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+
+        .section h2 {
+            color: #2c3e50;
+        }
+
+        .section p {
+            margin-bottom: 12px;
+            color: #555;
+        }
+
+        .section a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 18px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 6px;
+            transition: background .3s;
+        }
+
+        .section a:hover {
+            background-color: #2980b9;
+        }
+
+        nav a {
+            transition: opacity .3s;
+        }
+
+        nav a:hover {
+            opacity: .7;
+        }
+
+        /* Animação leve na entrada dos cards */
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp .6s forwards;
+        }
+        .section:nth-child(2) { animation-delay: .1s; }
+        .section:nth-child(3) { animation-delay: .2s; }
+        .section:nth-child(4) { animation-delay: .3s; }
+        .section:nth-child(5) { animation-delay: .4s; }
+        .section:nth-child(6) { animation-delay: .5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+/* Botão de sair melhorado */
+#botao button {
+    background-color: #e74c3c;
+    padding: 12px 22px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background .3s;
+}
+
+#botao button:hover {
+    background-color: #c0392b;
+}
+
+    .btn-sair{
+    margin-left:20px;
+    padding:8px 16px;
+    background:#e74c3c;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:14px;
+    transition:background .3s;
+}
+.btn-sair:hover{
+    background:#c0392b;
+}

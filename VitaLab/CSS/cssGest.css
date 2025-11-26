@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  --bg:#f6f8fa;
+  --card:#ffffff;
+  --primary:#2C3E50;
+  --accent:#3498db;
+  --success:#2ecc71;
+  --danger:#e74c3c;
+  --muted:#7f8c8d;
+}
+
+body{
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--primary);
+  margin: 0;
+  padding: 0;
+}
+
+header{
+  background-color: var(--primary);
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+nav{
+  background-color: #34495e;
+  padding: 12px 15px;
+  text-align: center;
+}
+
+nav a{
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 15px;
+}
+
+nav a:hover{ text-decoration: underline; }
+
+/* Botões principais */
+.btn{ padding:8px 12px; border-radius:8px; border:none; background:var(--accent); color:#fff; cursor:pointer; font-size:16px; }
+.btn.secondary{ background:#fff; color:var(--primary); border:1px solid #e6eef6; }
+.btn.active{ box-shadow:0 6px 18px rgba(52,125,190,0.12); transform:translateY(-1px); }
+
+/* botão de solicitar (cor de sucesso) - compartilha tamanho/fonte com .btn */
+#addSolicBtn, button#addExamBtn{ font-size:16px; padding:10px 16px; }
+#addSolicBtn{ background:var(--success); color:#fff; }
+
+.actions{
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.search{
+  width: 300px;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* ação padronizada para ícones nas tabelas */
+.action-btn{ margin-right:8px; padding:8px 10px; border-radius:8px; border:1px solid #e6eef6; background:#fff; cursor:pointer; display:inline-flex; align-items:center; gap:8px; font-size:14px; }
+.action-btn svg{ width:16px; height:16px; display:inline-block; }
+.action-btn.edit{ color:var(--accent); }
+.action-btn.del{ color:var(--danger); border-color:#f5d6d6; }
+
+/* Evita que a última coluna comprima os botões */
+table td:last-child{ white-space: nowrap; }
+
+/* tabelas */
+table{ width:100%; border-collapse:collapse; }
+th, td{ padding:16px; text-align:left; }
+
+tbody tr{ border-top:1px solid #e5e5e5; }
+
+.moreBtn{ background:none; border:none; font-size:22px; cursor:pointer; }
+
+/* popups/modal */
+.popup{ position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); display:flex; justify-content:center; align-items:center; z-index:10000; }
+.popup.hidden{ display:none; }
+body.modal-open{ overflow:hidden; }
+.popup-content{ background:#fff; padding:20px; width:100%; max-width:520px; border-radius:12px; max-height:calc(100vh - 80px); overflow:auto; }
+.popup-content input, .popup-content select{ width:100%; padding:10px; margin:6px 0 15px; border:1px solid #dcdcdc; border-radius:6px; }
+.popup-actions{ display:flex; justify-content:flex-end; gap:10px; }
+.close{ background:#ccc; border:none; padding:10px 15px; border-radius:6px; }
+.save{ background:var(--accent); color:#fff; border:none; padding:10px 15px; border-radius:6px; }
+
+/* Responsividade */
+@media (max-width:900px){
+  .actions{ flex-direction:column; align-items:stretch; }
+  .search{ width:100%; }
+  button#addExamBtn, #addSolicBtn{ width:100%; }
+}
+
+@media (max-width:650px){
+  table th:nth-child(3), table td:nth-child(3), table th:nth-child(4), table td:nth-child(4){ display:none; }
+  .popup-content{ width:90%; }
+}
+
+/* Evita que o footer fixo cubra o conteúdo principal */
+.container{ padding-bottom:110px; }
+
+/* Footer padrão (consistente com CSS principal) */
+footer{
+  background-color: var(--primary);
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
