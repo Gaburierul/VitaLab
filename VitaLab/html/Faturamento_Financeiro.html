@@ -1,0 +1,163 @@
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Controle de Estoque</title>
+	<link rel="stylesheet" href="../CSS/style.css">
+	<link rel="stylesheet" href="../CSS/CssPrincipal.css">
+	<link rel="stylesheet" href="../CSS/cssFinance.css">
+</head>
+<body>
+	<header>
+		<h1>VitaLab</h1>
+		<p>Monitoramento dos insumos laboratoriais, entrada, saída e alertas de reposição.</p>
+	</header>
+	<nav>
+		<a href="Menu_Principal.html">Menu Principal</a>
+		<a href="Cadastro_Gerenciamento_Funcionarios.html" >Cadastro de Funcionarios</a>
+		<a href="Cadastro_Gerenciamento_Pacientes.html">Cadastro de Pacientes</a>
+		<a href="Controle_Estoque.html">Controle de estoque</a>
+		<a href="Faturamento_Financeiro.html" class="blinking">Faturamento e Financeiro</a>
+		<a href="Gestao_Exames.html">Gestão de Exames</a>
+		
+	</nav>
+	<main class="container">
+		<section>
+			<h2>Faturamento e Financeiro</h2>
+			<div class="kpi-row">
+				<div class="kpi"><h3>Faturamento (mês)</h3><p id="kpiFaturamento">R$ 0,00</p></div>
+				<div class="kpi"><h3>Recebidos (mês)</h3><p id="kpiRecebidos">R$ 0,00</p></div>
+				<div class="kpi"><h3>Contas a Pagar</h3><p id="kpiPagar">R$ 0,00</p></div>
+				<div class="kpi"><h3>Inadimplência</h3><p id="kpiInadimplencia">0%</p></div>
+			</div>
+
+			<div class="invoice-actions" style="margin:12px 0">
+				<button id="btnNewInvoice" class="btn btn-lg">+ Nova Fatura</button>
+				<button id="btnNewPayment" class="btn btn-lg">Registrar Pagamento</button>
+				<button id="btnExportInvoices" class="btn">Exportar CSV</button>
+			</div>
+
+			<div class="table-wrap">
+				<table id="invoicesTable">
+					<thead>
+						<tr><th>#</th><th>Cliente</th><th>Emissão</th><th>Vencimento</th><th>Valor</th><th>Status</th><th>Ações</th></tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<div class="charts" style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;align-items:flex-start;">
+				<div style="flex:1;min-width:320px">
+					<h4 class="chart-title">Faturamento Mensal</h4>
+					<p class="chart-desc">Gráfico que mostra o total faturado por mês (soma dos valores das faturas emitidas).</p>
+					<canvas id="chartRevenue" height="180"></canvas>
+				</div>
+				<div style="flex:1;min-width:320px">
+					<h4 class="chart-title">Faturamento por Serviço</h4>
+					<p class="chart-desc">Distribuição do faturamento por tipo de serviço (últimos registros).</p>
+					<canvas id="chartByService" height="180"></canvas>
+				</div>
+			</div>
+
+			<!-- Modal: Criar / Editar Fatura -->
+			<div id="modalInvoice" class="popup hidden" role="dialog" aria-modal="true">
+				<div class="popup-content">
+					<div class="modal-header"><h3>Criar / Editar Fatura</h3></div>
+					<div class="modal-body">
+						<form id="invoiceForm" onsubmit="return false;">
+							<div class="form-row">
+								<div class="field">
+									<label for="inv_cliente">Cliente</label>
+									<input id="inv_cliente" name="inv_cliente" placeholder="Nome do cliente" />
+								</div>
+								<div class="field">
+									<label for="inv_cpf">CPF</label>
+									<input id="inv_cpf" name="inv_cpf" placeholder="CPF" />
+								</div>
+								<div class="field">
+									<label for="inv_data_emissao">Data Emissão</label>
+									<input id="inv_data_emissao" name="inv_data_emissao" type="date" />
+								</div>
+								<div class="field">
+									<label for="inv_vencimento">Vencimento</label>
+									<input id="inv_vencimento" name="inv_vencimento" type="date" />
+								</div>
+							</div>
+							<hr />
+							<h4>Itens</h4>
+							<div class="inv-items-wrap">
+								<div class="inv-items-header"><span>Descrição</span><span>Qtd</span><span>V. Unit.</span><span></span></div>
+								<div id="inv_items" class="inv-items"></div>
+								<div class="inv-actions">
+									<button id="addItemBtn" class="btn secondary" type="button">Adicionar Item</button>
+									<div class="inv-total">
+										<label>Total</label>
+										<input id="inv_total" readonly aria-readonly="true" />
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="popup-actions modal-footer">
+						<button class="btn secondary close">Cancelar</button>
+						<button id="saveInvoice" class="btn save">Salvar</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal: Registrar Pagamento -->
+			<div id="modalPayment" class="popup hidden" role="dialog" aria-modal="true">
+				<div class="popup-content">
+					<div class="modal-header"><h3>Registrar Pagamento</h3></div>
+					<div class="modal-body">
+						<form id="paymentForm" onsubmit="return false;">
+							<div class="form-row">
+								<div class="field">
+									<label for="pay_invoice_select">Fatura</label>
+									<select id="pay_invoice_select" name="pay_invoice_select"></select>
+								</div>
+								<div class="field">
+									<label for="pay_valor">Valor</label>
+									<input id="pay_valor" name="pay_valor" placeholder="0,00" />
+								</div>
+								<div class="field">
+									<label for="pay_forma">Forma</label>
+									<select id="pay_forma" name="pay_forma"><option value="dinheiro">Dinheiro</option><option value="cartao">Cartão</option><option value="transferencia">Transferência</option><option value="boleto">Boleto</option></select>
+								</div>
+								<div class="field">
+									<label for="pay_referencia">Referência</label>
+									<input id="pay_referencia" name="pay_referencia" />
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="popup-actions modal-footer">
+						<button class="btn secondary close">Cancelar</button>
+						<button id="savePayment" class="btn save">Registrar</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal: Detalhes da Fatura -->
+			<div id="modalInvoiceDetails" class="popup hidden">
+				<div class="popup-content">
+					<h3>Detalhes da Fatura</h3>
+					<div id="det_inv_info"></div>
+					<h4>Itens</h4>
+					<div id="det_inv_items"></div>
+					<h4>Pagamentos</h4>
+					<div id="det_inv_payments"></div>
+					<div class="popup-actions"><button class="btn secondary close">Fechar</button></div>
+				</div>
+			</div>
+
+		</section>
+	</main>
+
+	<footer>&copy; 2025 VitaLab | Todos os direitos reservados</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="../JS/scriptFinanceiro.js"></script>
+</body>
+</html>
+
