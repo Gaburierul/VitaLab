@@ -37,4 +37,7 @@ Este projeto foi construído "do zero", dominando as linguagens base da web sem 
 
 ## 👨‍💻 Autor
 
-- **Gabriel** (@Gaburierul) - *Desenvolvedor e Autor do TCC*
+- **Gabriel** (@Gaburierul)
+- **João Jacob**
+- **Victor Manzano**
+- **Arthur Fukuda**
