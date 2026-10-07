@@ -41,3 +41,4 @@ Este projeto foi construído "do zero", dominando as linguagens base da web sem 
 - **João Jacob**
 - **Victor Manzano**
 - **Arthur Fukuda**
+- **Marcelino**
